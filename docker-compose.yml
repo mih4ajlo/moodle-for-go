@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   mariadb:
     image: bitnami/mariadb:latest
@@ -6,18 +8,24 @@ services:
       - MARIADB_DATABASE=bitnami_moodle
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - 'mariadb_data:/bitnami/mariadb:Z' # :Z je ključno za SELinux/Podman dozvole
+      - 'mariadb_data:/bitnami/mariadb:Z'
 
   moodle:
     image: bitnami/moodle:latest
-    # U rootless modu, user: root unutar kontejnera je mapiran na tvog usera spolja
-    user: root 
+    user: root
     environment:
       - MOODLE_DATABASE_HOST=mariadb
+      - MOODLE_DATABASE_PORT_NUMBER=3306
+      - MOODLE_DATABASE_USER=bn_moodle
+      - MOODLE_DATABASE_NAME=bitnami_moodle
+      - ALLOW_EMPTY_PASSWORD=yes
       - MOODLE_REVERSEPROXY=yes
     volumes:
       - 'moodle_data:/bitnami/moodle:Z'
+      - 'moodledata_data:/bitnami/moodledata:Z'
       - './install_plugins.sh:/install_plugins.sh:Z'
+    depends_on:
+      - mariadb
     command: /bin/bash -c "/install_plugins.sh && /opt/bitnami/scripts/moodle/run.sh"
 
   caddy:
@@ -28,3 +36,19 @@ services:
     volumes:
       - './Caddyfile:/etc/caddy/Caddyfile:Z'
       - 'caddy_data:/data:Z'
+      - 'caddy_config:/config:Z'
+    depends_on:
+      - moodle
+
+# OVDE JE BIO PROBLEM - Svi volumeni moraju biti precizno definisani
+volumes:
+  mariadb_data:
+    driver: local
+  moodle_data:
+    driver: local
+  moodledata_data:
+    driver: local
+  caddy_data:
+    driver: local
+  caddy_config:
+    driver: local
