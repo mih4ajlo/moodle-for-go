@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   mariadb:
-    image: bitnami/mariadb:latest
+    image: docker.io/bitnami/mariadb:11.4
     container_name: moodle_db
     environment:
       - MARIADB_USER=bn_moodle
@@ -12,7 +12,7 @@ services:
       - 'mariadb_data:/bitnami/mariadb:Z'
 
   moodle:
-    image: bitnami/moodle:latest
+    image: docker.io/bitnami/moodle:4.5
     user: root
     container_name: moodle_app
     environment:
@@ -31,7 +31,7 @@ services:
     command: /bin/bash -c "/install_plugins.sh && /opt/bitnami/scripts/moodle/run.sh"
 
   caddy:
-    image: caddy:latest
+    image: docker.io/library/caddy:latest
     container_name: moodle_proxy
     ports:
       - "80:80"
