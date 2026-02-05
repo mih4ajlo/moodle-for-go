@@ -1,0 +1,55 @@
+Pravljenje H5P interaktivnog videa je srž edX iskustva. Umesto da koristiš JSON kod (koji može biti jako dugačak i osetljiv na verzije), najbolji način je da koristiš H5P editor unutar Moodle-a i pratiš proverenu "edX formulu".
+
+Evo kako da napraviš video koji ne dozvoljava polazniku da samo "preleti" gradivo.
+
+1. Priprema videa
+U svom kursu klikni na Add an activity or resource i izaberi H5P.
+
+U editoru izaberi Interactive Video.
+
+Klikni na + i unesi URL (npr. sa YouTube-a).
+
+Savet: Koristi video koji traje između 5 i 10 minuta. Sve duže od toga na edX-u se obično deli na dva dela.
+
+2. Dodavanje interakcije (The "Check for Understanding")
+Na edX-u se pitanja pojavljuju kao "pop-up" ili pauza.
+
+Idi na tab Add Interactions.
+
+Pomeri slider na npr. 02:30 minuta.
+
+Izaberi ikonicu Multiple Choice Question.
+
+Ključno podešavanje (edX stil):
+
+Čekiraj opciju Poster (tako da pitanje odmah bude vidljivo, a ne samo mala ikonica).
+
+Pod opcijom Adaptivity, postavi da ako korisnik pogreši, video ga vrati na početak te celine (npr. na 01:00).
+
+3. Onemogućavanje preskakanja (Prevent Skipping)
+edX platforme su stroge. Ne žele da polaznik samo premota na kraj da bi dobio "zeleni kvačica".
+
+U H5P editoru idi na Behavioral settings.
+
+Deštikliraj opciju Enable "Skip forward" button.
+
+Štikliraj Prevent skipping forward in the video. Sada polaznik mora da odgleda video u celosti (ili bar do sledećeg pitanja).
+
+4. Povezivanje sa ocenom u Moodle-u
+Da bi tvoja pravila o otključavanju sledeće lekcije radila, Moodle mora da zna da je video završen.
+
+U podešavanjima H5P aktivnosti u Moodle-u, idi na Grade.
+
+Postavi Grade to pass (npr. 80 ako imaš više pitanja u videu).
+
+Pod Activity completion izaberi:
+
+Student must receive a grade to complete this activity.
+
+5. Napredna edX fora: "Summary Quiz"
+Na samom kraju videa (poslednjih 10 sekundi), H5P automatski nudi Summary Task.
+
+Iskoristi ovo da postaviš 2-3 ključne tvrdnje o kojima je bilo reči u videu. Polaznik mora da izabere tačan skup tvrdnji da bi "potvrdio" da je razumeo suštinu.
+
+Tvoj sledeći korak:
+Sada kada imaš Docker sa svim pluginovima, CSS koji sve to "pegla" i plan za interaktivni video, tvoj sistem je tehnički spreman 100%.

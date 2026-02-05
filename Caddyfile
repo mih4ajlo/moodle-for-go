@@ -1,0 +1,17 @@
+# Zameni sa tvojim pravim domenom
+skola.tvojdomen.com {
+    reverse_proxy moodle:8080
+    
+    # Optimizacija za velike fajlove (video/backup)
+    request_body {
+        max_size 512MB
+    }
+    
+    # Dodatna sigurnosna zaglavlja u edX stilu
+    header {
+        # Sprečava druge sajtove da ugrade tvoj Moodle u iframe
+        X-Frame-Options "SAMEORIGIN"
+        X-XSS-Protection "1; mode=block"
+        Strict-Transport-Security "max-age=31536000;"
+    }
+}

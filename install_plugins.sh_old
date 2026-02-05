@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Folderi u koje instaliramo (Bitnami putanja)
+MOODLE_PATH="/bitnami/moodle"
+
+echo "Krecem sa preuzimanjem edX pluginova..."
+
+# 1. Moove Tema
+curl -L https://moodle.org/plugins/download.php/31034/theme_moove_moodle43_2023121500.zip -o moove.zip
+unzip -q o moove.zip -d $MOODLE_PATH/theme/
+
+# 2. Tiles Format
+curl -L https://moodle.org/plugins/download.php/30554/format_tiles_moodle43_2023111000.zip -o tiles.zip
+unzip -q -o tiles.zip -d $MOODLE_PATH/course/format/
+
+# 3. Completion Progress
+curl -L https://moodle.org/plugins/download.php/30062/block_completion_progress_moodle43_2023091100.zip -o progress.zip
+unzip -q -o progress.zip -d $MOODLE_PATH/blocks/
+
+# 4. Custom Certificate
+curl -L https://moodle.org/plugins/download.php/30129/mod_customcert_moodle43_2023091900.zip -o cert.zip
+unzip -q -o cert.zip -d $MOODLE_PATH/mod/
+
+echo "Svi pluginovi su skinuti. Pokrecem bazu podataka nadogradnju..."
+
+# Komanda koja govori Moodle-u da "proguta" nove fajlove i instalira ih u bazu
+php $MOODLE_PATH/admin/cli/upgrade.php --non-interactive
+
+echo "Sistem je spreman! Mozes podesiti Moove temu u administraciji."
