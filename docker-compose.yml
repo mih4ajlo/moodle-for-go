@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   mariadb:
-    image: docker.io/bitnami/mariadb:11.4
+    image: docker.io/bitnami/mariadb:lts-ubi9
     container_name: moodle_db
     environment:
       - MARIADB_USER=bn_moodle
@@ -12,7 +12,7 @@ services:
       - 'mariadb_data:/bitnami/mariadb:Z'
 
   moodle:
-    image: docker.io/bitnami/moodle:4.5
+    image: docker.io/bitnami/moodlehq/moodleapp:5.1.0
     user: root
     container_name: moodle_app
     environment:
